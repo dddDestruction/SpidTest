@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def apikeyPropertiesFile = rootProject.file("key")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdk 32
 
@@ -17,6 +21,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        buildConfigField "String", "API_KEY", apikeyProperties['API_KEY']
+        buildConfigField "String", "BASE_URL", "\"https://my.api.mockaroo.com/\""
     }
 
     buildTypes {
@@ -59,4 +65,8 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.7.2"
+    implementation "com.squareup.retrofit2:converter-gson:2.7.2"
 }
