@@ -89,5 +89,6 @@ dependencies {
     //truth dev
     androidTestImplementation 'androidx.test.ext:truth:1.3.0'
 
-
+    //Couroutine test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
 }

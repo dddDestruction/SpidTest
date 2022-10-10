@@ -12,7 +12,7 @@ interface MovieDao {
 
     //Inserta los valores de clima
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies: List<MovieEntity>)
+    suspend fun insertMovies(movies: List<MovieEntity>)
 
     //Obtiene todos los valores de clima desde Room DB
     @Query("SELECT * FROM recent_movies ORDER BY releaseState")
