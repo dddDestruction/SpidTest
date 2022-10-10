@@ -3,6 +3,7 @@ package com.simpledatacorp.spedtestapp.model.pojo
 data class Items(val items: List<Movie>)
 
 data class Movie(
+    val id:String,
     val fullTitle:String,
     val year: String,
     val releaseState: String,
