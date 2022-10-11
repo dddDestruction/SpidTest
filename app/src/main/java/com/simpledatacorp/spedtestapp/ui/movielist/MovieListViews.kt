@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.simpledatacorp.spedtestapp.R
 import com.simpledatacorp.spedtestapp.model.MoviesUtil
 import com.simpledatacorp.spedtestapp.selectedMovie
+import com.simpledatacorp.spedtestapp.ui.Routes
 import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
 
 
@@ -89,7 +91,11 @@ fun TrendingMovie(movie: ViewMovie) {
 fun MovieList(list: List<ViewMovie>, navController: NavHostController) {
     Column {
         Text(
-            text = "On Billboard",
+            text = if  (list.size > 0) {
+                stringResource(R.string.on_billboard_title)
+            } else {
+                stringResource(R.string.loading)
+            },
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
@@ -115,7 +121,7 @@ fun MovieItem(movie: ViewMovie, navController: NavHostController){
     ) {
         Button(onClick = {
             selectedMovie = movie
-            navController.navigate("details")
+            navController.navigate(Routes.Details.route)
         }) {
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -130,7 +136,6 @@ fun MovieItem(movie: ViewMovie, navController: NavHostController){
                 Row(
                     modifier = Modifier
                         .padding(3.dp)) {
-                    SimpleCardText(text = movie.contentRating)
                     SimpleCardText(text = movie.genreList[0])
                     RatingCardText(text = movie.imDbRating)
                 }
