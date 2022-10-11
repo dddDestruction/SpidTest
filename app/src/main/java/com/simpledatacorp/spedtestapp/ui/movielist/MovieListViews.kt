@@ -128,11 +128,17 @@ fun MovieItem(movie: ViewMovie, navController: NavHostController){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(16.dp)
             ) {
-                Image(
-                    painter = rememberAsyncImagePainter(movie.image),
-                    contentDescription = null,
-                    modifier = Modifier.size(200.dp)
-                )
+                Card(
+                    shape = RoundedCornerShape(8.dp),
+                    backgroundColor = MaterialTheme.colors.primaryVariant,
+                    modifier = Modifier.wrapContentWidth(),
+                ){
+                    Image(
+                        painter = rememberAsyncImagePainter(movie.image),
+                        contentDescription = null,
+                        modifier = Modifier.height(200.dp).width(170.dp).padding(5.dp)
+                    )
+                }
                 Row(
                     modifier = Modifier
                         .padding(3.dp)) {
