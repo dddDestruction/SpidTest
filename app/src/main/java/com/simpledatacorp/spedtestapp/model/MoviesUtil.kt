@@ -47,6 +47,11 @@ class MoviesUtil: IMoviesUtil {
         return date
     }
 
+    override fun dateToString(date: Date): String {
+        val simpleDateFormat = SimpleDateFormat("dd MMM yyyy", Locale.US)
+        return simpleDateFormat.format(date)
+    }
+
     override fun mapperMovieToViewMovie(movies: List<MovieEntity>): List<ViewMovie> {
         val finalList:MutableList<ViewMovie> = mutableListOf()
         movies.map {
