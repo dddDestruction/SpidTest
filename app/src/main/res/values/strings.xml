@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">SpedTestApp</string>
+    <string name="app_name">SpidTestApp</string>
     <string name="actors">Actors</string>
     <string name="loading">Loading</string>
     <string name="on_billboard_title">On Billboard</string>
+    <string name="now_trending_title">Now Trending</string>
 </resources>
