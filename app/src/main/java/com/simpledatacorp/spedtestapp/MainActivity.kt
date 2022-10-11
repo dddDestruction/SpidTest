@@ -27,13 +27,25 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SpedTestAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Black
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(text = "SpidTestApp")
+                            },
+                            backgroundColor = Color.Black,
+                        )
+                    }
                 ) {
-                    MyAppNavHost(viewModel = viewModel)
+
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = Color.Black
+                    ) {
+                        MyAppNavHost(viewModel = viewModel)
+                    }
                 }
+
             }
         }
         viewModel = MovieListViewModel(application)

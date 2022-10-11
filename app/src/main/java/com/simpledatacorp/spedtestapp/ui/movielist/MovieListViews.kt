@@ -55,12 +55,12 @@ fun TrendingMovie(movie: ViewMovie) {
         .fillMaxWidth()
         .padding(16.dp)) {
         Text(
-            text = "Now Trending",
+            text = stringResource(R.string.now_trending_title),
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(10.dp)
         )
         Row {
             Image(
