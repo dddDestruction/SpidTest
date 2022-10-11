@@ -7,7 +7,6 @@
 
     <path
         android:fillColor="#e64c65"
-        android:fillType="evenOdd"
         android:pathData="M32 16c0 8.824-7.176 16-16.053 16S0 24.824 0 16 7.123 0 16 0c8.877 0 16 7.176 16 16z" />
     <path
         android:fillColor="#cd244a"
