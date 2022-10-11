@@ -5,14 +5,22 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.simpledatacorp.spedtestapp.ui.moviedetail.MovieDetail
 import com.simpledatacorp.spedtestapp.ui.movielist.FrontPage
 import com.simpledatacorp.spedtestapp.ui.movielist.MovieListViewModel
 import com.simpledatacorp.spedtestapp.ui.theme.SpedTestAppTheme
+import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
 
+var selectedMovie: ViewMovie? = null
 class MainActivity : ComponentActivity() {
-    lateinit var viewModel: MovieListViewModel
+    private lateinit var viewModel: MovieListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,11 +30,33 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.Black
                 ) {
-                    FrontPage(viewModel)
+                    MyAppNavHost(viewModel = viewModel)
                 }
             }
         }
         viewModel = MovieListViewModel(application)
         viewModel.load()
+    }
+}
+
+@Composable
+fun MyAppNavHost(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    startDestination: String = "movieList",
+    viewModel: MovieListViewModel
+) {
+    NavHost(
+        modifier = modifier,
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        composable("movieList") {
+            FrontPage(viewModel, navController)
+        }
+        composable("details") { MovieDetail(
+            selectedMovie!!
+        )
+        }
     }
 }

@@ -21,16 +21,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.simpledatacorp.spedtestapp.R
 import com.simpledatacorp.spedtestapp.model.MoviesUtil
+import com.simpledatacorp.spedtestapp.selectedMovie
 import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
 
 
 val moviesUtil = MoviesUtil()
-
 @Composable
-fun FrontPage(viewModel: MovieListViewModel) {
+fun FrontPage(viewModel: MovieListViewModel, navController: NavHostController) {
     val list by viewModel.movies.observeAsState(listOf())
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
@@ -42,7 +43,7 @@ fun FrontPage(viewModel: MovieListViewModel) {
                 movie = lastFilm
             )
         }
-        MovieList(list = finalList)
+        MovieList(list = finalList, navController)
     }
 }
 
@@ -59,13 +60,13 @@ fun TrendingMovie(movie: ViewMovie) {
                 .fillMaxWidth()
                 .padding(16.dp)
         )
-        Row() {
+        Row {
             Image(
                 painter = rememberAsyncImagePainter(movie.image),
                 contentDescription = null,
                 modifier = Modifier.size(230.dp)
             )
-            Column() {
+            Column {
                 Text(
                     text = movie.fullTitle,
                     fontSize = 20.sp,
@@ -85,8 +86,8 @@ fun TrendingMovie(movie: ViewMovie) {
 }
 
 @Composable
-fun MovieList(list: List<ViewMovie>) {
-    Column() {
+fun MovieList(list: List<ViewMovie>, navController: NavHostController) {
+    Column {
         Text(
             text = "On Billboard",
             fontSize = 25.sp,
@@ -95,16 +96,16 @@ fun MovieList(list: List<ViewMovie>) {
                 .fillMaxWidth()
                 .padding(16.dp)
         )
-        LazyRow() {
+        LazyRow {
             items(list.size) { movieIndex ->
-                MovieItem(movie = list[movieIndex])
+                MovieItem(movie = list[movieIndex], navController)
             }
         }
     }
 }
 
 @Composable
-fun MovieItem(movie: ViewMovie){
+fun MovieItem(movie: ViewMovie, navController: NavHostController){
     Card(
         shape = RoundedCornerShape(8.dp),
         backgroundColor = MaterialTheme.colors.primary,
@@ -113,7 +114,8 @@ fun MovieItem(movie: ViewMovie){
             .padding(16.dp)
     ) {
         Button(onClick = {
-
+            selectedMovie = movie
+            navController.navigate("details")
         }) {
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -147,7 +149,7 @@ fun MovieItem(movie: ViewMovie){
 @Composable
 fun SimpleCardText(text: String){
     var alfa = 1f
-    if (text.equals("")){
+    if (text == ""){
         alfa = 0f
     }
     Card(
