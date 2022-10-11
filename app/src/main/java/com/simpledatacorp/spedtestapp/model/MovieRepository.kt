@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class MovieRepository(context: Context, scope: CoroutineScope):IMovieRepository {
 
-    val moviesManager = MovieDBManager(context, scope)
+    var moviesManager = MovieDBManager(context, scope)
     var movies = moviesManager.getMovies()
     private val sharedPrefenrecesManager = SharedPrefenrecesManager(context)
     val util = MoviesUtil()
