@@ -15,6 +15,9 @@ interface IMoviesUtil {
 
     fun dateToString(date: Date): String
 
+    //Transforma una pelicula obtenida en BD a ViewMovie
+    fun mapperSingleMovieToViewMovie(movie: MovieEntity): ViewMovie
+
     //Transforma las peliculas obtenidas BD a películas para la vista
     fun mapperMovieToViewMovie(movies: List<MovieEntity>): List<ViewMovie>
 

@@ -13,4 +13,8 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     fun load(){
         repository.loadData()
     }
+
+    fun saveId(id: String){
+        repository.saveId(id)
+    }
 }
