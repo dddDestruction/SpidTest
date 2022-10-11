@@ -10,4 +10,8 @@ interface IMovieRepository {
     fun insertMovies(movies: List<MovieEntity>)
     //Obtiene una pelicula guardada desde la BBDD local según su id
     fun loadMovie(id: String): LiveData<MovieEntity>
+    //Guarda el id de la película seleccionada en SharedPreferences
+    fun saveId(id: String)
+    //Obtiene el id de la pelicula seleccionada
+    fun getId(): String
 }

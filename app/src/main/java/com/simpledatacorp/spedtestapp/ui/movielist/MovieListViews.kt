@@ -26,15 +26,16 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.simpledatacorp.spedtestapp.R
 import com.simpledatacorp.spedtestapp.model.MoviesUtil
-import com.simpledatacorp.spedtestapp.selectedMovie
 import com.simpledatacorp.spedtestapp.ui.Routes
 import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
 
 
-val moviesUtil = MoviesUtil()
+private val moviesUtil = MoviesUtil()
+private lateinit var listViewModel : MovieListViewModel
 @Composable
 fun FrontPage(viewModel: MovieListViewModel, navController: NavHostController) {
-    val list by viewModel.movies.observeAsState(listOf())
+    listViewModel = viewModel
+    val list by listViewModel.movies.observeAsState(listOf())
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
     ) {
@@ -66,7 +67,7 @@ fun TrendingMovie(movie: ViewMovie) {
             Image(
                 painter = rememberAsyncImagePainter(movie.image),
                 contentDescription = null,
-                modifier = Modifier.size(230.dp)
+                modifier = Modifier.size(200.dp)
             )
             Column {
                 Text(
@@ -120,7 +121,7 @@ fun MovieItem(movie: ViewMovie, navController: NavHostController){
             .padding(16.dp)
     ) {
         Button(onClick = {
-            selectedMovie = movie
+            listViewModel.saveId(movie.id)
             navController.navigate(Routes.Details.route)
         }) {
             Column(
@@ -136,7 +137,10 @@ fun MovieItem(movie: ViewMovie, navController: NavHostController){
                     Image(
                         painter = rememberAsyncImagePainter(movie.image),
                         contentDescription = null,
-                        modifier = Modifier.height(200.dp).width(170.dp).padding(5.dp)
+                        modifier = Modifier
+                            .height(200.dp)
+                            .width(170.dp)
+                            .padding(5.dp)
                     )
                 }
                 Row(

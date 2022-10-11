@@ -7,7 +7,6 @@ import com.simpledatacorp.spedtestapp.model.pojo.Genre
 import com.simpledatacorp.spedtestapp.model.pojo.Items
 import com.simpledatacorp.spedtestapp.model.pojo.Stars
 import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
-import java.text.ParsePosition
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,25 +51,29 @@ class MoviesUtil: IMoviesUtil {
         return simpleDateFormat.format(date)
     }
 
+    override fun mapperSingleMovieToViewMovie(movie: MovieEntity): ViewMovie {
+        return ViewMovie(
+            movie.id,
+            movie.fullTitle,
+            movie.year,
+            movie.releaseState,
+            movie.image,
+            movie.runtimeStr,
+            movie.plot,
+            movie.contentRating,
+            movie.imDbRating,
+            movie.metacriticRating,
+            mapperGenreToList(movie.genreList.genreList),
+            movie.directors,
+            mapperStarsToList(movie.starList.starList)
+        )
+    }
+
     override fun mapperMovieToViewMovie(movies: List<MovieEntity>): List<ViewMovie> {
         val finalList:MutableList<ViewMovie> = mutableListOf()
         movies.map {
             finalList.add(
-                ViewMovie(
-                    it.id,
-                    it.fullTitle,
-                    it.year,
-                    it.releaseState,
-                    it.image,
-                    it.runtimeStr,
-                    it.plot,
-                    it.contentRating,
-                    it.imDbRating,
-                    it.metacriticRating,
-                    mapperGenreToList(it.genreList.genreList),
-                    it.directors,
-                    mapperStarsToList(it.starList.starList)
-                )
+                mapperSingleMovieToViewMovie(it)
             )
         }
         return finalList

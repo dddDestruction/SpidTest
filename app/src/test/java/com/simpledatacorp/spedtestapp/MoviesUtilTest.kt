@@ -161,6 +161,78 @@ class MoviesUtilTest {
     }
 
     @Test
+    fun mapperSingleMovieToViewMovieTest() {
+        val movieEntity = MovieEntity("tt1649418",
+            "The Gray Man",
+            "2022",
+            getTestDate()!!,
+            "https://m.media-amazon.com/images/M/MV5BOWY4MmFiY2QtMzE1YS00NTg1LWIwOTQtYTI4ZGUzNWIxNTVmXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_UX128_CR0,4,128,176_AL_.jpg",
+            "122 mins",
+            "When the CIA's most skilled operative-whose true identity is known to none-accidentally uncovers dark agency secrets, a psychopathic former colleague puts a bounty on his head, setting off a global manhunt by international assassins.",
+            "PG-13",
+            "6.6",
+            "49",
+            GenreList(
+                listOf(
+                    Genre("Action",
+                        "Action"),
+                    Genre("Thriller",
+                        "Thriller")
+                )
+            ),
+            "Anthony Russo, Joe Russo",
+            StarList(
+                listOf(
+                    Stars("nm0331516",
+                        "Ryan Gosling"),
+                    Stars("nm0262635",
+                        "Chris Evans"),
+                    Stars("nm1869101",
+                        "Ana de Armas"),
+                    Stars("nm0000671",
+                        "Billy Bob Thornton")
+                )
+            )
+        )
+
+        val viewMovie = ViewMovie("tt1649418",
+            "The Gray Man",
+            "2022",
+            getTestDate()!!,
+            "https://m.media-amazon.com/images/M/MV5BOWY4MmFiY2QtMzE1YS00NTg1LWIwOTQtYTI4ZGUzNWIxNTVmXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_UX128_CR0,4,128,176_AL_.jpg",
+            "122 mins",
+            "When the CIA's most skilled operative-whose true identity is known to none-accidentally uncovers dark agency secrets, a psychopathic former colleague puts a bounty on his head, setting off a global manhunt by international assassins.",
+            "PG-13",
+            "6.6",
+            "49",
+            util.mapperGenreToList (
+                listOf(
+                    Genre("Action",
+                        "Action"),
+                    Genre("Thriller",
+                        "Thriller")
+                )
+            ),
+            "Anthony Russo, Joe Russo",
+            util.mapperStarsToList(
+                listOf(
+                    Stars("nm0331516",
+                        "Ryan Gosling"),
+                    Stars("nm0262635",
+                        "Chris Evans"),
+                    Stars("nm1869101",
+                        "Ana de Armas"),
+                    Stars("nm0000671",
+                        "Billy Bob Thornton")
+                )
+            )
+        )
+
+        val moviewRes = util.mapperSingleMovieToViewMovie(movieEntity)
+        Truth.assertThat(moviewRes.toString()).isEqualTo(viewMovie.toString())
+    }
+
+    @Test
     fun mapperMovieToViewMovieTest() {
         val movies = listOf(
             MovieEntity("tt1649418",

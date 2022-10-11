@@ -9,4 +9,6 @@ interface IMoviesDBManager {
     fun getMovies(): LiveData<List<MovieEntity>>
     //Inserta las películes en la base de datos
     fun inserMovies(movies: List<MovieEntity>): Job
+    //obtiene una película según su id
+    fun getMovieById(id: String): LiveData<MovieEntity>
 }

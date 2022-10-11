@@ -11,6 +11,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -25,10 +27,14 @@ import com.simpledatacorp.spedtestapp.ui.movielist.SimpleCardText
 import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
 
 
-val moviesUtil = MoviesUtil()
+private val moviesUtil = MoviesUtil()
 
 @Composable
-fun MovieDetail(movie: ViewMovie) {
+fun MovieDetail(detailViewModel: DetailViewModel) {
+    val id = detailViewModel.getSavedId()
+    val movieEntity by detailViewModel.getFilmById(id).observeAsState()
+    if (movieEntity == null) return
+    val movie = moviesUtil.mapperSingleMovieToViewMovie(movieEntity!!)
     Card(
         shape = RoundedCornerShape(8.dp),
         backgroundColor = MaterialTheme.colors.primary,
@@ -38,9 +44,9 @@ fun MovieDetail(movie: ViewMovie) {
     ) {
         Column(
             modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())) {
+                .fillMaxWidth()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())) {
             Row(modifier = Modifier
                 .horizontalScroll(rememberScrollState())) {
                 Card(

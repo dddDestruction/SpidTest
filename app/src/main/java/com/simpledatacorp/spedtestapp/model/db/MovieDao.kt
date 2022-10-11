@@ -18,4 +18,7 @@ interface MovieDao {
     @Query("SELECT * FROM recent_movies ORDER BY releaseState")
     fun getAllMovies(): LiveData<List<MovieEntity>>
 
+    //Obtiene una película según el id
+    @Query("SELECT * FROM recent_movies WHERE id = :id")
+    fun getMovieById(id:String): LiveData<MovieEntity>
 }

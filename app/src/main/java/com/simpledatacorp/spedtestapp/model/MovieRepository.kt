@@ -7,6 +7,7 @@ import com.simpledatacorp.spedtestapp.model.api.RetrofitClient
 import com.simpledatacorp.spedtestapp.model.db.MovieDBManager
 import com.simpledatacorp.spedtestapp.model.entities.MovieEntity
 import com.simpledatacorp.spedtestapp.model.pojo.Items
+import com.simpledatacorp.spedtestapp.model.sharedPreferences.SharedPrefenrecesManager
 import kotlinx.coroutines.CoroutineScope
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +17,7 @@ class MovieRepository(context: Context, scope: CoroutineScope):IMovieRepository 
 
     val moviesManager = MovieDBManager(context, scope)
     var movies = moviesManager.getMovies()
+    private val sharedPrefenrecesManager = SharedPrefenrecesManager(context)
     val util = MoviesUtil()
 
     override fun loadData() {
@@ -41,6 +43,14 @@ class MovieRepository(context: Context, scope: CoroutineScope):IMovieRepository 
     }
 
     override fun loadMovie(id: String): LiveData<MovieEntity> {
-        TODO("Not yet implemented")
+        return moviesManager.getMovieById(id)
+    }
+
+    override fun saveId(id: String) {
+        sharedPrefenrecesManager.saveSelection(id)
+    }
+
+    override fun getId(): String {
+        return sharedPrefenrecesManager.getIdSelected()
     }
 }
