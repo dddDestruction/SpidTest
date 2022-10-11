@@ -46,13 +46,14 @@ fun MovieDetail(movie: ViewMovie) {
                 Card(
                     shape = RoundedCornerShape(8.dp),
                     backgroundColor = MaterialTheme.colors.primaryVariant,
-                    modifier = Modifier.wrapContentSize()
+                    modifier = Modifier.wrapContentWidth(),
                 ){
                     Image(
                         painter = rememberAsyncImagePainter(movie.image),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(230.dp)
+                            .height(230.dp)
+                            .width(200.dp)
                             .padding(5.dp)
                     )
                 }
