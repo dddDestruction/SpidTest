@@ -11,7 +11,7 @@ class RetrofitTest {
         //Se crea instancia de retrofit
         val instace: Retrofit = RetrofitClient().retrofit
         //Se compara url base de retrofit
-        assert(instace.baseUrl().url().toString() == BuildConfig.BASE_URL)
+        assert(instace.baseUrl().toUrl().toString() == BuildConfig.BASE_URL)
     }
 
     @Test
