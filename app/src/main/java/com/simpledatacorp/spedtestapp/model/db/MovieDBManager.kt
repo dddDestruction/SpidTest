@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 class MovieDBManager(val context: Context, val scope: CoroutineScope):IMoviesDBManager {
 
-    val movieDao = MovieBD.getDatabase(context).dao()
+    var movieDao = MovieBD.getDatabase(context).dao()
 
     override fun getMovies(): LiveData<List<MovieEntity>> {
         return movieDao.getAllMovies()
