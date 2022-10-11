@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpedTestApp</string>
+    <string name="actors">Actors</string>
 </resources>

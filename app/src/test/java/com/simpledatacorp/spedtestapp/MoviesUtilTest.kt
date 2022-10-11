@@ -102,6 +102,15 @@ class MoviesUtilTest {
         Truth.assertThat(dateRes.toString()).isEqualTo(date.toString())
     }
 
+    @Test
+    fun dateToStringTest() {
+
+        val date = getTestDate()
+        val dateString = "22 Jul 2022"
+        val resString = util.dateToString(date!!)
+        Truth.assertThat(resString).isEqualTo(dateString)
+    }
+
     fun getTestDate(): Date?{
         val calendar = Calendar.getInstance()
         calendar.set(2022, 6, 22, 0, 0, 0)

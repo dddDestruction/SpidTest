@@ -13,6 +13,8 @@ interface IMoviesUtil {
 
     fun stringToDate(dateString: String): Date
 
+    fun dateToString(date: Date): String
+
     //Transforma las peliculas obtenidas BD a películas para la vista
     fun mapperMovieToViewMovie(movies: List<MovieEntity>): List<ViewMovie>
 
