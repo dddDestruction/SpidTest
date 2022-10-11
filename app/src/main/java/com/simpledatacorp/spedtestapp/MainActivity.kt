@@ -12,9 +12,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.simpledatacorp.spedtestapp.ui.Routes
 import com.simpledatacorp.spedtestapp.ui.moviedetail.MovieDetail
 import com.simpledatacorp.spedtestapp.ui.movielist.FrontPage
 import com.simpledatacorp.spedtestapp.ui.movielist.MovieListViewModel
+import com.simpledatacorp.spedtestapp.ui.splashview.AnimatedSplash
 import com.simpledatacorp.spedtestapp.ui.theme.SpedTestAppTheme
 import com.simpledatacorp.spedtestapp.ui.viewpojo.ViewMovie
 
@@ -43,7 +45,7 @@ class MainActivity : ComponentActivity() {
 fun MyAppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = "movieList",
+    startDestination: String = "splash",
     viewModel: MovieListViewModel
 ) {
     NavHost(
@@ -51,10 +53,13 @@ fun MyAppNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable("movieList") {
+        composable(Routes.Splash.route) {
+            AnimatedSplash(navController)
+        }
+        composable(Routes.MovieList.route) {
             FrontPage(viewModel, navController)
         }
-        composable("details") { MovieDetail(
+        composable(Routes.Details.route) { MovieDetail(
             selectedMovie!!
         )
         }
